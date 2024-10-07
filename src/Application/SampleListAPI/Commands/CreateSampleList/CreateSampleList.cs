@@ -108,27 +108,19 @@ namespace SampleProject.Application.SampleListAPI.Commands.CreateSampleList
                     Length = request.LotDimension.Length,
                     Width = request.LotDimension.Width,
                     TotalLotSize = request.LotDimension.TotalLotSize,
-                    Unit = request.LotDimension.Unit
+                    Unit = request.LotDimension.Unit,
+                    Amenities = new List<Amenity>(),
+                    ExternalFeatures = new List<ExternalFeature>()
                 };
 
                 foreach (var amenityId in request.PropertyOverview.AmenityIds)
                 {
-                    var amenity = await _context.Amenities.FindAsync(amenityId);
-                    if (amenity != null)
-                    {
-                        amenity.PropertyId = property.Id;
-                        property.Amenities.Add(amenity);
-                    }
+                    property.Amenities.Add(new Amenity { Id = amenityId });
                 }
 
                 foreach (var externalFeatureId in request.PropertyOverview.ExternalFeatureIds)
                 {
-                    var externalFeature = await _context.ExternalFeatures.FindAsync(externalFeatureId);
-                    if (externalFeature != null)
-                    {
-                        externalFeature.PropertyId = property.Id;
-                        property.ExternalFeatures.Add(externalFeature);
-                    }
+                    property.ExternalFeatures.Add(new ExternalFeature { Id = externalFeatureId });
                 }
 
                 _context.Properties.Add(property);

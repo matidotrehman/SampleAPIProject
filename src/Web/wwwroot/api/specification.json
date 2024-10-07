@@ -849,24 +849,37 @@
       "PropertyAddress": {
         "type": "object",
         "additionalProperties": false,
+        "required": [
+          "address",
+          "city",
+          "province",
+          "postalCode",
+          "country",
+          "cadastralDesignation"
+        ],
         "properties": {
           "address": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           "addressLine2": {
             "type": "string"
           },
           "city": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           "province": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           "postalCode": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           "country": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           "cadastralDesignation": {
             "type": "integer",

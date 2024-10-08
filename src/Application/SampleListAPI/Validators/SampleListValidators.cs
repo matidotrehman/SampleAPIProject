@@ -36,7 +36,9 @@ public class SampleListValidators : AbstractValidator<CreateSampleList>
             .NotEmpty().WithMessage("Country is required.");
 
         RuleFor(x => x.PropertyAddress.CadastralDesignation)
-            .GreaterThan(0).WithMessage("Cadastral designation is required and must be a positive integer.");
+        .GreaterThan(0).WithMessage("Cadastral designation is required and must be a positive integer.")
+        .Must(x => x.ToString().Length == 7)
+        .WithMessage("Cadastral designation must be exactly 7 digits long.");
 
         RuleFor(x => x.PropertyOverview.Bedroom)
             .Must(BeValidNumber).WithMessage("Bedroom count must be a valid number or empty.");
